@@ -1,0 +1,26 @@
+Config { font = "xft:Monospace Regular:pixelsize=12:antialias=true:hinting=true"
+       , additionalFonts = [ "xft:Mononoki:pixelsize=11:antialias=true:hinting=true"]
+       , borderColor = "black"
+       , border = TopB
+       , bgColor = "black"
+       , fgColor = "white"
+       , alpha = 180
+       , position = BottomSize L 100 20
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [ Run Cpu ["-t", "CPU:(<total>%)","-H","50","--high","red"] 20
+                    , Run Memory ["-t", "MEM:<used>M (<usedratio>%)"] 20
+                    , Run DiskU [("/", "<free> livre")] [] 60
+                    , Run DynNetwork ["-t","<rx>kB/s - <tx>kB/s","-H","200","-L","10","-h","gray90","-l","gray90","-n","gray90"] 10
+					, Run DateZone "%A %d %b %Y - %H:%M:%S" "pt_BR.UTF-8" "" "date" 10
+                    , Run CoreTemp ["-t", "<core1>°C", "-L", "40", "-H", "75", "-l", "lightblue", "-n", "gray90", "-h", "#F25555"] 50
+					]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " %disku% | %cpu% %coretemp% | %memory% | %dynnetwork%}{%date% |                                   "
+       }
